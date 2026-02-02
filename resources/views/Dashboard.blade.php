@@ -258,7 +258,8 @@
     }
 
     /* --- Floating Action Button (Add Location) --- */
-    .fab {
+    .fab { 
+        display: none !important;
         position: absolute;
         bottom: 80px;
         right: 24px;
@@ -1714,21 +1715,35 @@ function getUserLocation() {
                     map.removeLayer(userMarker);
                 }
 
+
+
                 // Create custom icon for user location
-                const userIcon = L.divIcon({
-                    className: 'custom-user-marker',
-                    html: '<div style="background: #4285F4; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>',
-                    iconSize: [22, 22],
-                    iconAnchor: [11, 11]
-                });
+                // const userIcon = L.divIcon({
+                //     className: 'custom-user-marker',
+                //     html: '<div style="background: #4285F4; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>',
+                //     iconSize: [22, 22],
+                //     iconAnchor: [11, 11]
+                // });
 
                 // Add user marker to map
                 userMarker = L.marker(userLocation, {
-                    icon: userIcon,
+                    draggable: true ,
+                    // icon: userIcon,
                     title: 'Lokasi Anda'
                 }).addTo(map);
 
                 userMarker.bindPopup('<b>Lokasi Anda</b>').openPopup();
+                userMarker.on('dragend', function (e) {
+                    var newPosition = userMarker.getLatLng();
+                    tempMarkerLatLng = {lat: newPosition.lat, lng: newPosition.lng};
+
+                    
+                    
+
+                    
+                    console.log("Latitude:", position.lat);
+                    console.log("Longitude:", position.lng);
+                });
             },
             (error) => console.log('Error getting location:', error)
         );
@@ -2327,6 +2342,17 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     });
 });
 
+// Check hash untuk open modal dari redirect
+window.addEventListener('load', function() {
+    if (window.location.hash === '#open-location-modal') {
+        setTimeout(function() {
+            openLocationModal();
+            // Hapus hash dari URL
+            history.replaceState(null, null, ' ');
+        }, 500);
+    }
+});
+
 // Initialize map on page load
 window.addEventListener('load', () => setTimeout(initMap, 200));
 
@@ -2342,4 +2368,4 @@ window.openTidePopup = openTidePopup;
 window.closeTidePopup = closeTidePopup;
 </script>
 @endpush
-@endsection  
+@endsection

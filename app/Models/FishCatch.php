@@ -53,4 +53,4 @@ class FishCatch extends Model
     {
         return $this->weight * ($this->quantity ?? 1);
     }
-}
+} 

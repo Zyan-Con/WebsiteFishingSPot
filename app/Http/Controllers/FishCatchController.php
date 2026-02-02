@@ -181,6 +181,50 @@ class FishCatchController extends Controller
         }
     }
 
+//     public function update(Request $request, Catch $catch)
+// {
+//     $request->validate([
+//         'fish_type' => 'required|string|max:255',
+//         'weight' => 'nullable|numeric|min:0',
+//         'length' => 'nullable|numeric|min:0',
+//         'quantity' => 'nullable|integer|min:1',
+//         'location' => 'required|string|max:255',
+//         'latitude' => 'nullable|numeric',
+//         'longitude' => 'nullable|numeric',
+//         'caught_at' => 'required|date',
+//         'fishing_method' => 'nullable|string',
+//         'weather' => 'nullable|string',
+//         'water_temp' => 'nullable|numeric',
+//         'notes' => 'nullable|string',
+//         'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:5120'
+//     ]);
+
+//     try {
+//         $data = $request->except('photo');
+
+//         // Handle photo upload if exists
+//         if ($request->hasFile('photo')) {
+//             // Delete old photo
+//             if ($catch->photo && Storage::exists('public/' . $catch->photo)) {
+//                 Storage::delete('public/' . $catch->photo);
+//             }
+            
+//             // Store new photo
+//             $data['photo'] = $request->file('photo')->store('catches', 'public');
+//         }
+
+//         $catch->update($data);
+
+//         return redirect()->route('catches.index')
+//             ->with('success', 'Tangkapan berhasil diperbarui!');
+
+//     } catch (\Exception $e) {
+//         return back()
+//             ->withInput()
+//             ->withErrors(['error' => 'Gagal memperbarui tangkapan: ' . $e->getMessage()]);
+//     }
+// }
+
     public function destroy(FishCatch $catch)
     {
         if ($catch->user_id !== auth()->id()) {
@@ -202,4 +246,4 @@ class FishCatchController extends Controller
             return back()->with('error', '❌ Gagal menghapus data: ' . $e->getMessage());
         }
     }
-}
+} 

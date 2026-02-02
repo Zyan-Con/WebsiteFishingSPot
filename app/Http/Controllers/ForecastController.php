@@ -11,13 +11,17 @@ use Carbon\Carbon;
 class ForecastController extends Controller
 {
     // ========================================
-    // 1. WEATHER FORECAST (Cuaca) ☀️
+    // MAIN INDEX - Return view dengan semua tab
     // ========================================
     
     public function index()
     {
-        return view('forecast.weather');
+        return view('forecast.index');
     }
+    
+    // ========================================
+    // 1. WEATHER FORECAST (Cuaca) ☀️
+    // ========================================
     
     public function weather(Request $request)
     {
@@ -655,11 +659,11 @@ class ForecastController extends Controller
     }
     
     // ========================================
-    // AJAX ENDPOINTS untuk Modal Pop-up
+    // AJAX ENDPOINTS untuk Data Tab
     // ========================================
     
     /**
-     * Get Activity Data for AJAX (untuk modal)
+     * Get Activity Data for AJAX
      */
     public function getActivityData(Request $request)
     {
@@ -701,7 +705,7 @@ class ForecastController extends Controller
     }
     
     /**
-     * Get Tide Data for AJAX (untuk modal)
+     * Get Tide Data for AJAX
      */
     public function getTideDataAjax(Request $request)
     {
@@ -744,7 +748,7 @@ class ForecastController extends Controller
     }
     
     /**
-     * Get Weather Data for AJAX (untuk modal)
+     * Get Weather Data for AJAX
      */
     public function getWeatherData(Request $request)
     {
@@ -807,7 +811,7 @@ class ForecastController extends Controller
     }
     
     /**
-     * Get Wave Data for AJAX (untuk modal)
+     * Get Wave Data for AJAX
      */
     public function getWaveDataAjax(Request $request)
     {
@@ -908,4 +912,4 @@ class ForecastController extends Controller
             'daily' => []
         ]);
     }
-}
+} 

@@ -109,10 +109,10 @@ class AuthController extends Controller
             }
 
             Auth::login($user);
-            return redirect()->route('dashboard')->with('success', 'Login dengan Google berhasil!');
+            return redirect()->route('admin.layouts.app')->with('success', 'Login dengan Google berhasil!');
 
         } catch (Exception $e) {
             return redirect()->route('login')->withErrors(['error' => 'Gagal login dengan Google: ' . $e->getMessage()]);
         }
     }
-}
+} 
